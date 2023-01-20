@@ -1,5 +1,5 @@
 # About
-“A bot of people” is a virtual space built on P5.js that aims to highlight an aspect of technology that is often hidden, that of other users’ presence and interactions in the places we visit on the internet. The experience is available at: <br>
+“A bot of people” is a virtual space built on P5.js that aims to highlight an aspect of technology that is often hidden, that of other users’ presence and interactions in the places we visit on the internet. The experience is available [at this link.](https://drawwithcode.github.io/2022-group-project-group02/) <br>
 “A bot of people” is a project created as part of the elective course [Creative Coding](https://drawwithcode.github.io/) at [Politecnico di Milano](https://www11.ceda.polimi.it/schedaincarico/schedaincarico/controller/scheda_pubblica/SchedaPublic.do?&evn_default=evento&c_classe=696598&__pj0=0&__pj1=3ed8420c42c849845b5caa3de626e8fc).
 
 # Team
@@ -26,7 +26,8 @@ d. [Content](#content)<br>
 4. [Coding Challenges](#coding-challenges)<br>
 a. [Functionality](#functionality)<br>
 b. [Visual](#visual)<br>
-5. [Faculty](#faculty)
+5. [Libraries and tools](#libraries-and-tools)<br>
+6. [Faculty](#faculty)
 
 # Project idea
 #### Theme
@@ -41,20 +42,25 @@ The project is designed to be used anywhere and in any circumstance. A user will
 
 #### Exhibition
 For the purposes of an exhibition the work may be presented with the use of a projector and three computers, for visitors to complete the experience. One of these computers would be connected to the projector in order to show the experience as well as the visual outputs also to visitors who are not actively participating. The computers should be set up in a way that keeps the experience personal and individual.
+![exhibitionsetup](readme/schema_def.png)
 
 # Structure
 #### Introduction
-When landing on the site, the user goes through an introduction presented by an “Artificial Intelligence”. This will offer a very brief explanation of what the project aims to do while also playing on the concept of reCAPTCHAs and testing a user’s human attributes. This was done to push a further reflection on the fact that it is machines judging our humanity and that usually users are pushed to behave as human as they can. This time, however, they will not only have to please the AI, they will also think that there are others who can see their actions in that moment. After the introduction, the user will have to declare that they are human in order to begin and they will start seeing other people’s cursors from past interactions on their screen.
+When landing on the site, the user goes through an introduction presented by an “Artificial Intelligence”. This will offer a very brief explanation of what the project aims to do while also playing on the concept of reCAPTCHAs and testing a user’s human attributes. This was done to push a further reflection on the fact that it is machines judging our humanity and that usually users are pushed to behave as human as they can. This time, however, they will not only have to please the AI, they will also think that there are others who can see their actions in that moment. After the introduction, the user will have to declare that they are human in order to begin and they will start seeing other people’s cursors from past interactions on their screen. <br>
+![intro](readme/human-min.gif)
 
 #### The CAPTCHAs
-Following their declaration, the AI will not be convinced that the user is human and will redirect them to a series of image-based tests, starting with an unconventional one that remains straight forward and moving towards less obvious and more personal ones. Here they will still be exposed to the experience of other users, seeing the cursors and what they were doing when going through the different stages. The user will have a time limit to choose their one and only answer and position their mouse over it before the end of the timer to confirm their choice. Once the timer stops they will automatically be redirected to the next test together with the other users.
+Following their declaration, the AI will not be convinced that the user is human and will redirect them to a series of image-based tests, starting with an unconventional one that remains straight forward and moving towards less obvious and more personal ones. Here they will still be exposed to the experience of other users, seeing the cursors and what they were doing when going through the different stages. The user will have a time limit to choose their one and only answer and position their mouse over it before the end of the timer to confirm their choice. Once the timer stops they will automatically be redirected to the next test together with the other users. <br>
+![captcha](readme/captcha1-min.gif)
 
 #### Final visual output
-Once the final test is complete the user will stop seeing the cursors of all other users and will be shown an abstracted visual representation of the interaction they were just a part of. This will no longer show the pictures of the test but instead they will see coloured squares of different sizes based on the amount of users that “voted” for that image. In the meantime they will see a reproduction of the interactions of all users in the form of lines to represent the traces that were left with their mouse. This will allow the user to spot any type of hidden pattern within the interaction while also being able to see indecisive behaviours or even users following each other.
+Once the final test is complete the user will stop seeing the cursors of all other users and will be shown an abstracted visual representation of the interaction they were just a part of. This will no longer show the pictures of the test but instead they will see coloured squares of different sizes based on the amount of users that “voted” for that image. In the meantime they will see a reproduction of the interactions of all users in the form of lines to represent the traces that were left with their mouse. This will allow the user to spot any type of hidden pattern within the interaction while also being able to see indecisive behaviours or even users following each other.<br>
+![artwork](readme/artwork2-min.gif)
 
 # Design Challenges
 #### Thinking Machine
-Some design challenges that were faced in the creation of this project included setting the right mood to evoke the intended feelings in the users. The idea was to create an environment where the machine itself is addressing the audience directly in a way that wouldn’t make the user feel like they are alone or singled out but rather that they are one of many. Due to this “character” presenting the experience, it was also crucial to make it look like the AI was almost “thinking” in the moment as the text is and questions are generated. A moving gradient was created, inspired by many common abstract representations of artificial intelligence such as SIRI.
+Some design challenges that were faced in the creation of this project included setting the right mood to evoke the intended feelings in the users. The idea was to create an environment where the machine itself is addressing the audience directly in a way that wouldn’t make the user feel like they are alone or singled out but rather that they are one of many. Due to this “character” presenting the experience, it was also crucial to make it look like the AI was almost “thinking” in the moment as the text is and questions are generated. A moving gradient was created, inspired by many common abstract representations of artificial intelligence such as SIRI.<br>
+![gradient](readme/gradient-min.gif)
 
 #### Copy
 This futuristic and surreal setting had to be accompanied by copy that would make the user understand straight away that it was the machine itself addressing them. It was important that the copy would explain the concept without giving away too much before the experience. The AI had to have a personality, a snarky one, without being exaggerated and still seeming machine-like enough to almost raise feelings of unease on behalf of the audience.
@@ -63,7 +69,7 @@ This futuristic and surreal setting had to be accompanied by copy that would mak
 Although the content was inspired by reCAPTCHAs the project needed to have a clear-cut and unique personality which had to be developed in accordance with a clean high-tech look to remain coherent with the AI persona. It was crucial to find a balance between the feelings that had to be evoked through the sophisticated look and the simplistic, bland and often un-aesthetic nature of reCAPTCHAs. The general visual identity of the project therefore was created to play between the two face of technology with a near-perfect environment that is being inhabited by what look like random stock images, pixelated cursors and one single human hand to represent the cursor of the current user. This mix and match of elements is able to underline all that is beautiful and perfect but also messy questionable about the way AI can work.
 
 #### Content
-The content constituted another design challenge as it was supposed to present users with questions that would be out of the box and that could both be fun and thought-provoking. It was important that the content would render the fact of seeing other users’ interactions even more significant, as with questions where the answer is an opinion or a subjective feeling. Furthermore, in order to encourage users to move their mouse enough during the experience, instead of clicking on images, users have to place their mouse over the image that represents their answer and instead of choosing many different answers they would only have to choose one. These tweaks helped make the content more interesting while encouraging more significant movements while leaving more space for potential social influence between users when answering questions.
+The content constituted another design challenge as it was supposed to present users with questions that would be out of the box and that could both be fun and thought-provoking. It was important that the content would render the fact of seeing other users’ interactions even more significant, for example with questions where the answer is an opinion or a subjective feeling. The questions are all related to the topic of technology ranging from general to personal ones to encourage a reflection on the relationship that people have with technology. These question therefore are only possible to answer if the user is indeed human. Furthermore, in order to encourage users to move their mouse enough during the experience, instead of clicking on images, users have to place their mouse over the image that represents their answer and instead of choosing many different answers they would only have to choose one. These tweaks helped make the content more interesting while encouraging more significant movements while leaving more space for potential social influence between users when answering questions.
 
 # Coding challenges
 #### Functionality
@@ -158,7 +164,7 @@ function draw() {
 }
 ```
 
-# Libraries, tools, references, tutorials
+# Libraries and tools
 [Cloud Firestore](https://firebase.google.com/docs/firestore)<br>
 [Firebase](https://firebase.google.com/)<br>
 
