@@ -172,13 +172,13 @@ function setup() {
   titolo3 = new testo('WHAT STRESSES YOU THE MOST', windowWidth/2, 70*pt,pt*30,0,CENTER,TOP);
   titolo4 = new testo('YOUR DEFINITION OF TECHNOLOGY', windowWidth/2, 70*pt,pt*30,0,CENTER,TOP);
   titolo5 = new testo('THE HAPPIEST PERSON', windowWidth/2, 70*pt,pt*30,0,CENTER,TOP);
-  stitolo1 = new testo('THE RIGHT IMAGE', windowWidth/2, 600*yScale,pt*30,0,CENTER,TOP);
+  stitolo1 = new testo('THE CORRECT WALLPAPER', windowWidth/2, 600*yScale,pt*30,0,CENTER,TOP);
   stitolo2 = new testo('YOUR RELATIONSHIP WITH TECHNOLOGY', windowWidth/2, 600*yScale,pt*30,0,CENTER,TOP);
   stitolo3 = new testo('WHAT STRESSES YOU THE MOST', windowWidth/2, 600*yScale,pt*30,0,CENTER,TOP);
   stitolo4 = new testo('YOUR DEFINITION OF TECHNOLOGY', windowWidth/2, 600*yScale,pt*30,0,CENTER,TOP);
   stitolo5 = new testo('THE HAPPIEST PERSON', windowWidth/2, 600*yScale,pt*30,0,CENTER,TOP);
   testocheck = new testo('I am not a robot',w2 +13*pt,h2-3*pt,pt*18,30,CENTER,CENTER)
-  titolone = new testo('a bot of people', windowWidth/2, h2,pt*42,0,CENTER,TOP);
+  titolone = new testo('a bot of people', windowWidth/2,h2,pt*42,0,CENTER,CENTER);
   // dx = new testo('Next', (7*windowWidth)/8, 400*yScale, 10*pt, 0, CENTER, TOP, 1000);
   // sx = new testo('Prev', windowWidth/8, 400*yScale, 10*pt, 0, CENTER, TOP, 1000);
   img1 = new Immagini(w2, h2, 420, imgid1);
