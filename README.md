@@ -132,6 +132,32 @@ The gradient in the background, represents AI thinking, was coded by creating el
 
 Unfortunately it was found that the library used for the blur effect of the ellipses is not supported by Safari. This issue was tackled by using the Navigator userAgent property which returns string that represents information about the user's browser, including the name. It was found that an additional check is necessary in the case of Safari since it is also included in Chrome's user agent and may result positive even when the real browser is Chrome. This value was then used in a for statement in order to show an image of the gradient when the user is accessing through Safari and keeping the moving gradient for all other browsers.<br>
 
+```javascript
+let userAgentString = navigator.userAgent;
+let safariAgent = userAgentString.indexOf("Safari") > -1;
+let chromeAgent = userAgentString.indexOf("Chrome") > -1;
+let bgSafari;
+
+function preload(){
+  bgSafari = loadImage("./resources/sfondosafari/sfondosafari.png")
+}
+
+function setup (){
+  if ((chromeAgent) && (safariAgent)) {safariAgent = false;}
+}
+
+function draw() {
+  if (safariAgent) {image(bgSafari, windowWidth/2, windowHeight/2, windowWidth, windowHeight)}
+  else {
+  backgroundgblur();
+  push();
+  fill(color(255,100));
+  rect(windowWidth/2,windowHeight/2,windowWidth,windowHeight)
+  pop();
+}
+}
+```
+
 # Libraries, tools, references, tutorials
 [Cloud Firestore](https://firebase.google.com/docs/firestore)<br>
 [Firebase](https://firebase.google.com/)<br>
