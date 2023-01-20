@@ -1,7 +1,7 @@
 ![heading](readme/BANNER.png)
 
 # About
-“a bot of people” is a virtual space built on P5.js that aims to highlight an aspect of technology that is often hidden, that of other users’ presence and interactions in the places we visit on the internet. The experience is available [at this link.](https://drawwithcode.github.io/2022-group-project-group02/) <br>
+“a bot of people” is a virtual space built on P5.js that aims to highlight an aspect of technology that is often hidden, that of other users’ presence and interactions in the places we visit on the internet. The experience is available [at this link.](https://abotofpeople.onrender.com) <br>
 “a bot of people” is a project created as part of the elective course [Creative Coding](https://drawwithcode.github.io/) at [Politecnico di Milano](https://www11.ceda.polimi.it/schedaincarico/schedaincarico/controller/scheda_pubblica/SchedaPublic.do?&evn_default=evento&c_classe=696598&__pj0=0&__pj1=3ed8420c42c849845b5caa3de626e8fc).
 
 # Team
