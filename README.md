@@ -71,6 +71,7 @@ Although the content was inspired by reCAPTCHAs the project needed to have a cle
 
 #### Content
 The content constituted another design challenge as it was supposed to present users with questions that would be out of the box and that could both be fun and thought-provoking. It was important that the content would render the fact of seeing other users’ interactions even more significant, for example with questions where the answer is an opinion or a subjective feeling. The questions are all related to the topic of technology ranging from general to personal ones to encourage a reflection on the relationship that people have with technology. These question therefore are only possible to answer if the user is indeed human. Furthermore, in order to encourage users to move their mouse enough during the experience, instead of clicking on images, users have to place their mouse over the image that represents their answer and instead of choosing many different answers they would only have to choose one. These tweaks helped make the content more interesting while encouraging more significant movements while leaving more space for potential social influence between users when answering questions.
+![contenuti](readme/5CAPTCHA.png)
 
 # Coding challenges
 #### Functionality
@@ -237,6 +238,7 @@ function backgroundgblur() {
   image(pg,windowWidth/2,windowHeight/2,windowWidth*1.25, windowHeight*1.25);
   
   //STOP BLUR
+  //ctx.filter = 'blur(0px)';
   ctx.filter = "none";
 }
 ```
