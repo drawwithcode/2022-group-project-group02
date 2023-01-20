@@ -1,6 +1,6 @@
 # About
-“A bot of people” is a virtual space built on P5.js that aims to highlight an aspect of technology that is often hidden, that of other users’ presence and interactions in the places we visit on the internet. The experience is available [at this link.](https://drawwithcode.github.io/2022-group-project-group02/) <br>
-“A bot of people” is a project created as part of the elective course [Creative Coding](https://drawwithcode.github.io/) at [Politecnico di Milano](https://www11.ceda.polimi.it/schedaincarico/schedaincarico/controller/scheda_pubblica/SchedaPublic.do?&evn_default=evento&c_classe=696598&__pj0=0&__pj1=3ed8420c42c849845b5caa3de626e8fc).
+“a bot of people” is a virtual space built on P5.js that aims to highlight an aspect of technology that is often hidden, that of other users’ presence and interactions in the places we visit on the internet. The experience is available [at this link.](https://drawwithcode.github.io/2022-group-project-group02/) <br>
+“a bot of people” is a project created as part of the elective course [Creative Coding](https://drawwithcode.github.io/) at [Politecnico di Milano](https://www11.ceda.polimi.it/schedaincarico/schedaincarico/controller/scheda_pubblica/SchedaPublic.do?&evn_default=evento&c_classe=696598&__pj0=0&__pj1=3ed8420c42c849845b5caa3de626e8fc).
 
 # Team
 Alessandro Raimondo <br>
@@ -67,6 +67,7 @@ This futuristic and surreal setting had to be accompanied by copy that would mak
 
 #### Aesthetic
 Although the content was inspired by reCAPTCHAs the project needed to have a clear-cut and unique personality which had to be developed in accordance with a clean high-tech look to remain coherent with the AI persona. It was crucial to find a balance between the feelings that had to be evoked through the sophisticated look and the simplistic, bland and often un-aesthetic nature of reCAPTCHAs. The general visual identity of the project therefore was created to play between the two face of technology with a near-perfect environment that is being inhabited by what look like random stock images, pixelated cursors and one single human hand to represent the cursor of the current user. This mix and match of elements is able to underline all that is beautiful and perfect but also messy questionable about the way AI can work.
+![moodboard](readme/Palette.png)
 
 #### Content
 The content constituted another design challenge as it was supposed to present users with questions that would be out of the box and that could both be fun and thought-provoking. It was important that the content would render the fact of seeing other users’ interactions even more significant, for example with questions where the answer is an opinion or a subjective feeling. The questions are all related to the topic of technology ranging from general to personal ones to encourage a reflection on the relationship that people have with technology. These question therefore are only possible to answer if the user is indeed human. Furthermore, in order to encourage users to move their mouse enough during the experience, instead of clicking on images, users have to place their mouse over the image that represents their answer and instead of choosing many different answers they would only have to choose one. These tweaks helped make the content more interesting while encouraging more significant movements while leaving more space for potential social influence between users when answering questions.
@@ -134,11 +135,30 @@ function quadrati1(){                                                           
 function quadrati2
 ```
 #### Visual
-The gradient in the background, represents AI thinking, was coded by creating ellipses of different sizes and colours on the canvas. These ellipses were then blurred. At first the image filter(BLUR), available within p5.js, was used but it required too much computing power and it slowed down the page excessively. A canvas was therefore created using html and css to access an effect library external to p5 in order to achieve the same visual result that would not have an effect on the speed of the site. These effects were then applied only to the background which has its own function that is recalled within the draw() function. For the movement of the ellipses, perlin noise was used in order to keep the movements fluid and natural-looking even if they are supposed to be random. <br>
+The gradient in the background represents AI thinking. It was coded by creating circles of different size and colour on a PGraphic element. These shapes were then blurred and made more transparent. Initially this was obtained with the image filter(BLUR), available within p5.js, but it required too much computing power and it slowed down the page.<br>
+
+So we used some native HTML5 Canvas functionality that is not exposed by p5. We called these functions with the variable drawingContext. So we used the Canvas API to blur the gradient (CanvasRenderingContext2D.filter), this filter didn’t affect the speed of the site, and to draw shadows.<br>
 
 Unfortunately it was found that the library used for the blur effect of the ellipses is not supported by Safari. This issue was tackled by using the Navigator userAgent property which returns string that represents information about the user's browser, including the name. It was found that an additional check is necessary in the case of Safari since it is also included in Chrome's user agent and may result positive even when the real browser is Chrome. This value was then used in a for statement in order to show an image of the gradient when the user is accessing through Safari and keeping the moving gradient for all other browsers.<br>
 
+Perlin noise was used to give the blurred circle fluid and natural-looking movements. The smaller the difference between successive coordinates, the smoother the resulting noise sequence is, so we chose incremental steps of 0.008. This is then multiplied by the vel const that makes the movements larger and more visible.<br>
+
+These effects were then applied only to the background which has its own function that is called at the start of the draw() function.<br>
+
 ```javascript
+// COLORI GRADIENTE DI SFONFO
+
+let canvas, ctx;
+
+bgcolor1 = '#826FF4'; // VIOLA
+bgcolor2 = '#B983FE'; // VIOLETTO
+bgcolor3 = '#FF8383'; // ROSINO
+bgcolor4 = '#7EEF7E'; // VERDE
+bgcolor5 = '#84B6F9'; // AZZURRO
+
+let t = 0; //VARIABILE DI PARTENZA PER SCORRERE ATTRAVERSO I VALORI DEL NOISE
+
+//VARIABILI PER RILEVARE BROWSER
 let userAgentString = navigator.userAgent;
 let safariAgent = userAgentString.indexOf("Safari") > -1;
 let chromeAgent = userAgentString.indexOf("Chrome") > -1;
@@ -149,11 +169,22 @@ function preload(){
 }
 
 function setup (){
+  canvas = createCanvas(windowWidth, windowHeight);
+  canvas.mouseClicked(() => started = true);
+  ctx = canvas.drawingContext;
+  rectMode(CENTER);
+  imageMode(CENTER);
+  xScale = (1920/windowWidth);
+  yScale = (1080/windowHeight);
+  frameRate(60);                             //blocco fps a 60
+  scaricaDaFirebase();                       //funzione per scaricare database da firebase. Nel setup perché prima cosa che succede
+  pg = createGraphics(windowWidth, windowHeight);
+
   if ((chromeAgent) && (safariAgent)) {safariAgent = false;}
 }
 
 function draw() {
-  if (safariAgent) {image(bgSafari, windowWidth/2, windowHeight/2, windowWidth, windowHeight)}
+  if (safariAgent) {image(bgSafari, windowWidth/2, windowHeight/2, windowWidth, windowHeight)}              //sfondo per safari
   else {
   backgroundgblur();
   push();
@@ -161,6 +192,52 @@ function draw() {
   rect(windowWidth/2,windowHeight/2,windowWidth,windowHeight)
   pop();
 }
+}
+
+function backgroundgblur() {
+
+  // PROPRIETÀ
+  pg.noStroke();
+  pg.background('#E1E7F6');
+
+  // VARIABILI
+
+  t = t + 0.008; // LA VARIABILE VIENE INCREMENTATA OGNI CICLO E PERMETTE LO SPOSTAMENTO TRA I VALORI DEL NOISE. CON UN INCREMENTO PIù BASSO SI OTTIENE UN MOVIMENTO MAGGIORE NELLO SPAZIO MA PIÙ LENTO
+  const vel = 1000; // VELOCITÀ A CUI SI MUOVE (DI QUANTO SI SPOSTA)
+  var px = windowWidth/10; // COSÌ DA MANTENERE SCALABILE IL POSIZIONAMENTO DEI CERCHI
+
+  // BLUR STARTS
+
+  ctx.filter = 'blur(400px)';
+  
+  //AZZURRO
+  pg.fill(bgcolor5);
+  pg.ellipse(vel*noise(15+t), vel*noise(t), 600);
+
+  //VERDE
+  pg.fill(bgcolor4);
+  pg.ellipse(3*px+vel*noise(70+t), 2*px+vel*noise(25+t), 300);
+
+  //VIOLETTO
+  pg.fill(bgcolor2);
+  pg.ellipse(5*px+vel*noise(10+t), -px+vel*noise(20+t), 100);
+
+  //VIOLA
+  pg.fill(bgcolor1);
+  pg.ellipse(5*px+vel*noise(12+t), vel*noise(18+t), 400);
+
+  //ROSINO
+  pg.fill(bgcolor3);
+  pg.ellipse(px+vel*noise(2+t), vel*noise(30+t), 200);
+
+  //TRASPARENZA
+  // tint(255, 200);
+
+  //PER VISUALIZZARE  
+  image(pg,windowWidth/2,windowHeight/2,windowWidth*1.25, windowHeight*1.25);
+  
+  //STOP BLUR
+  ctx.filter = "none";
 }
 ```
 
