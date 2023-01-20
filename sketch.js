@@ -272,7 +272,7 @@ if(phase == -1){
 
       if(progress1<duration){      //ciclo if per far succedere le cose prima che il tempo scada
       recordMouseMovement(1);      //registra i movimenti del mouse dell'utente
-      //showOthersCursor(1);         //mostra i cursori delle registrazioni degli altri utenti
+      showOthersCursor(1);         //mostra i cursori delle registrazioni degli altri utenti
       progress1++;                 //aumenta il progresso finché non raggiunge la durata
 
         if (frameCount % 60 == 0 && timer > 0) { // ciclo if per far diminuire il timer a schermo.
@@ -281,11 +281,9 @@ if(phase == -1){
 
         if (timer == 0) {                       //se il timer a schermo raggiunge 0 attiva la funzione aumentaPunteggio() che salva la scelta dell'immagine
           aumentaPunteggio(4);
+          salvaTraccia(1);
           phase++                               //quando il timer scade aumenta la fase e va alla "pagina" successiva
         }
-      }
-      if(progress1 == duration-1){               //la traccia1 viene salvata nel frame prima che il progresso arrivi alla fine
-        salvaTraccia(1);
       }
   }
   
@@ -307,7 +305,7 @@ if(phase == -1){
 
     if(progress2<duration){
       recordMouseMovement(2);
-      //showOthersCursor(2);
+      showOthersCursor(2);
       progress2++;                 //aumenta il progresso finché non raggiunge la durata
 
       if (frameCount % 60 == 0 && timer2 > 0) { // ciclo if per far diminuire il timer a schermo.
@@ -316,11 +314,9 @@ if(phase == -1){
 
       if (timer2 == 0) {                       //se il timer a schermo raggiunge 0 attiva la funzione aumentaPunteggio() che salva la scelta dell'immagine
         aumentaPunteggio(4);
+        salvaTraccia(2);
         phase++                                //quando il timer scade aumenta la fase e va alla "pagina" successiva
       }
-    }
-    if(progress2 == duration-1){               //la traccia2 viene salvata nel frame prima che il progresso arrivi alla fine
-      salvaTraccia(2);
     }
 
     
@@ -345,7 +341,7 @@ if(phase == -1){
 
     if(progress3<duration){
       recordMouseMovement(3);
-      //showOthersCursor(3);
+      showOthersCursor(3);
       progress3++;                 //aumenta il progresso finché non raggiunge la durata
 
       if (frameCount % 60 == 0 && timer3 > 0) { // ciclo if per far diminuire il timer a schermo.
@@ -354,11 +350,9 @@ if(phase == -1){
 
       if (timer3 == 0) {                       //se il timer a schermo raggiunge 0 attiva la funzione aumentaPunteggio() che salva la scelta dell'immagine
         aumentaPunteggio(9);
+        salvaTraccia(3);
         phase++                                //quando il timer scade aumenta la fase e va alla "pagina" successiva
       }
-    }
-    if(progress3 == duration-1){               //la traccia2 viene salvata nel frame prima che il progresso arrivi alla fine
-      salvaTraccia(3);
     }
 
   } else if(phase == 3){ 
@@ -381,7 +375,7 @@ if(phase == -1){
 
   if(progress4<duration){
     recordMouseMovement(4);
-    //showOthersCursor(4);
+    showOthersCursor(4);
     progress4++;                 //aumenta il progresso finché non raggiunge la durata
 
     if (frameCount % 60 == 0 && timer4 > 0) { // ciclo if per far diminuire il timer a schermo.
@@ -390,11 +384,9 @@ if(phase == -1){
 
     if (timer4 == 0) {                       //se il timer a schermo raggiunge 0 attiva la funzione aumentaPunteggio() che salva la scelta dell'immagine
       aumentaPunteggio(9);
+      salvaTraccia(4);
       phase++                                //quando il timer scade aumenta la fase e va alla "pagina" successiva
     }
-  }
-  if(progress4 == duration-1){               //la traccia2 viene salvata nel frame prima che il progresso arrivi alla fine
-    salvaTraccia(4);
   }
   }
   
@@ -417,7 +409,7 @@ if(phase == -1){
 
       if(progress5<duration){
         recordMouseMovement(5);
-        //showOthersCursor(5);
+        showOthersCursor(5);
         progress5++;                 //aumenta il progresso finché non raggiunge la durata
     
         if (frameCount % 60 == 0 && timer5 > 0) { // ciclo if per far diminuire il timer a schermo.
@@ -426,11 +418,9 @@ if(phase == -1){
     
         if (timer5 == 0) {                       //se il timer a schermo raggiunge 0 attiva la funzione aumentaPunteggio() che salva la scelta dell'immagine
           aumentaPunteggio(4);
+          salvaTraccia(5);
           phase++                                //quando il timer scade aumenta la fase e va alla "pagina" successiva
         }
-      }
-      if(progress5 == duration-1){               //la traccia2 viene salvata nel frame prima che il progresso arrivi alla fine
-        salvaTraccia(5);
       }
       }
     else if(phase == 5){
