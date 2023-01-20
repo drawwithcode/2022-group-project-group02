@@ -24,7 +24,9 @@ b. [Copy](#copy)<br>
 c. [Aesthetic](#aesthetic)<br>
 d. [Content](#content)<br>
 4. [Coding Challenges](#coding-challenges)<br>
-a. 
+a. [Functionality](#functionality)<br>
+b. [Visual](#visual)<br>
+5. [Faculty](#faculty)
 
 # Project idea
 #### Theme
@@ -52,7 +54,7 @@ Once the final test is complete the user will stop seeing the cursors of all oth
 
 # Design Challenges
 #### Thinking Machine
-Some design challenges that were faced in the creation of this project included setting the right mood to evoke the intended feelings in the users. The idea was to create an environment where the machine itself is addressing the audience directly in a way that wouldn’t make the user feel like they are alone or singled out but rather that they are one of many. Due to this “character” presenting the experience, it was also crucial to make it look like the AI was almost “thinking” in the moment as the text is and questions are generated. A moving gradient was created, inspired by many common abstract representations of artificial intelligence such as SIRI. 
+Some design challenges that were faced in the creation of this project included setting the right mood to evoke the intended feelings in the users. The idea was to create an environment where the machine itself is addressing the audience directly in a way that wouldn’t make the user feel like they are alone or singled out but rather that they are one of many. Due to this “character” presenting the experience, it was also crucial to make it look like the AI was almost “thinking” in the moment as the text is and questions are generated. A moving gradient was created, inspired by many common abstract representations of artificial intelligence such as SIRI.
 
 #### Copy
 This futuristic and surreal setting had to be accompanied by copy that would make the user understand straight away that it was the machine itself addressing them. It was important that the copy would explain the concept without giving away too much before the experience. The AI had to have a personality, a snarky one, without being exaggerated and still seeming machine-like enough to almost raise feelings of unease on behalf of the audience.
@@ -64,3 +66,77 @@ Although the content was inspired by reCAPTCHAs the project needed to have a cle
 The content constituted another design challenge as it was supposed to present users with questions that would be out of the box and that could both be fun and thought-provoking. It was important that the content would render the fact of seeing other users’ interactions even more significant, as with questions where the answer is an opinion or a subjective feeling. Furthermore, in order to encourage users to move their mouse enough during the experience, instead of clicking on images, users have to place their mouse over the image that represents their answer and instead of choosing many different answers they would only have to choose one. These tweaks helped make the content more interesting while encouraging more significant movements while leaving more space for potential social influence between users when answering questions.
 
 # Coding challenges
+#### Functionality
+One of the first challenges to face was finding a way to store all the mouse positions of each user throughout the experience in order to reproduce them for the next user both in the form of a cursor during the question and later as a trace for the artwork. This was done with the use of Cloud Firestore which is part of the firebase database. Within Cloud Firestore multiple arrays with mouse positions for each user were stored under specific IDs. These were then recalled and reproduced with the cursor during the reCAPTCHA tests and with the trace being drawn for the artwork. <br>
+Even if FireBase could have been appropriate as a database, due to the hierarchy of the stored variables, the nature of FireStore seemed more optimised for the project.<br>
+A specific function allows to download the content of the database in the beginning and stores it in a variable.<br>
+```javascript
+const firebaseConfig = {
+    apiKey: "AIzaSyAJC8TnWIqUubK6IF3xS4ARy7_z1QS4eHY",
+    authDomain: "prova-database-533e7.firebaseapp.com",
+    projectId: "prova-database-533e7",
+    storageBucket: "prova-database-533e7.appspot.com",
+    messagingSenderId: "899788419506",
+    appId: "1:899788419506:web:526acf508d7abe846434ab"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();    //associa database a una variabile
+  ```
+Furthermore for the final artwork it was important to store the final position of the mouse of every user at the end of the timer in order to recreate squares of a size proportional to the amount of “votes” received. Within Cloud Firestore there are different folders for each question and within those there is one per image. A score goes up if a user’s mouse position ends up in the location of that image. This information again is recalled for the creation of the final artwork.<br><br>
+In addition, another challenge was to optimise the code after the functionality was achieved. The biggest problem was the repetition of entire parts of code for all five questions. In order to avoid this, the best solution was to use parameters and smaller functions to automatically apply specific values to different variables. 
+
+```javascript
+function disegnaLinee(numPhase){                                          //mostra le linee del server dopo averle disegnate
+  
+  othersNum = Function('return ' + ("othersArrays"+numPhase))()           //funzione che scrive "othersArrays"+ il parametro numPhase per inserirla nella funzione disegnaLinee stessa e evitare di creare più funzioni "disegnaLinee"
+  replayNum = Function('return ' + ("replayProgress"+numPhase))()         //funzione che scrive "replayProgress"+ il parametro numPhase per inserirla nella funzione disegnaLinee stessa e evitare di creare più funzioni "disegnaLinee"
+               
+  for(let j=0; j<othersNum.length; j++){                           
+    for(let i=0; i<replayNum; i++){
+      if(othersNum[j].posX[i] > 0 && othersNum[j].posY[i]>0){             //ciclo if per evitare di disegnare i punti in 0, 0 per evitare bug grafico
+        line(othersNum[j].posX[i]/xScale, othersNum[j].posY[i]/yScale, othersNum[j].posX[i+1]/xScale, othersNum[j].posY[i+1]/yScale)
+      }
+    }
+  }
+  for(let k=0; k<replayNum; k++){                                                           //mostra linea da te tracciata dopo averla disegnata
+    let posXNum = Function('return ' + ("posArrayX"+numPhase))()                            //funzione per evitare di creare più funzioni "disegnaLinee"
+    let posYNum = Function('return ' + ("posArrayY"+numPhase))()                            
+    if(posXNum[k] > 0 && posArrayY2[k]>0){                                                  //ciclo if per evitare di disegnare i punti in 0, 0 per evitare bug grafico
+     line(posXNum[k]/xScale, posYNum[k]/yScale, posXNum[k+1]/xScale, posYNum[k+1]/yScale)   //mostra linea da te tracciata dopo averla disegnata
+    }
+  }
+}
+```
+
+But in some cases this was not possible, for example when creating the squares in the final output.<br>
+
+```javascript
+function quadrati1(){                                                                         //funzioni per disegnare le immagini scalate. Una per ogni captcha
+  for(let i = 0; i<punteggi1.length; i++){                                                    //ciclo for per inserire negli array vuoti i valori per cui moltiplicare le dimensioni delle immagini
+    times1[i] = (punteggi1[i].score)/(personalId1+1)
+  }
+  rectpiccolo1 = new forma (xcentro1,ycentro1,ssize*times1[0],ssize*times1[0],"rect");
+  rectpiccolo2 = new forma (xcentro2,ycentro2,ssize*times1[1],ssize*times1[1],"rect");
+  rectpiccolo3 = new forma (xcentro3,ycentro3,ssize*times1[2],ssize*times1[2],"rect");
+  rectpiccolo4 = new forma (xcentro4,ycentro4,ssize*times1[3],ssize*times1[3],"rect");
+  rectpiccolo1.show();
+  rectpiccolo2.show();
+  rectpiccolo3.show();
+  rectpiccolo4.show();
+}
+function quadrati2
+```
+#### Visual
+The gradient in the background, represents AI thinking, was coded by creating ellipses of different sizes and colours on the canvas. These ellipses were then blurred. At first the filters available within p5 were used but the filter(BLUR) resulted too heavy and slowed down the page excessively. A canvas was therefore created using html and css to access an effect library external to p5 in order to achieve the same visual result that would not have an effect on the speed of the site. These effects were then applied only to the background which has its own function that is recalled within the draw() function. For the movement of the ellipses, perlin noise was used in order to keep the movements fluid and natural-looking even if they are supposed to be random. <br>
+
+Unfortunately it was found that the library used for the blur effect of the ellipses is not supported by Safari. This issue was tackled by using the Navigator userAgent property which returns string that represents information about the user's browser, including the name. It was found that an additional check is necessary in the case of Safari since it is also included in Chrome's user agent and may result positive even when the real browser is Chrome. This value was then used in a for statement in order to show an image of the gradient when the user is accessing through Safari and keeping the moving gradient for all other browsers.<br>
+
+# Libraries, tools, references, tutorials
+[Cloud Firestore](https://firebase.google.com/docs/firestore)<br>
+[Firebase](https://firebase.google.com/)<br>
+
+# Faculty
+Michele Mauri <br>
+Tommaso Elli <br>
+Andrea Benedetti
